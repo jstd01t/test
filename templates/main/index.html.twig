@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Products{% endblock %}
+
+{% block body %}
+    <h2>Users and their Products</h2>
+    {% for user in users %}
+        <h4>{{ user }}</h4>
+        {% for product in products %}
+            {% if user.id == product.user.id %}
+                {{ product.name }}
+            {% endif %}
+
+        {% endfor %}
+    {% endfor %}
+    <p>
+        <a href="{{ path('user') }}">user create</a>
+    </p>
+    <p>
+        <a href="{{ path('product') }}">add products</a>
+    </p>
+{% endblock %}
