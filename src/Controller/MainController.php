@@ -31,36 +31,20 @@ class MainController extends AbstractController
     {
         return new Response($this->twig->render('main/index.html.twig', [
             'users' => $userRepository->findAll(),
-            'products'=>$productRepository->findAll(),
+            'products' => $productRepository->findAll(),
             //dump($userRepository->findAll()),
             //dump($productRepository->findAll()),
         ]));
     }
 
-    #[Route('/product', name: 'product')]
-    public function addProduct(Request $request):Response
-    {
-        $product = new Product();
-        $form = $this->createForm(ProductFormType::class, $product);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $this->entityManager->persist($product);
-            $this->entityManager->flush();
-            return $this->redirectToRoute('main');
-        }
-        return $this->render('main/product.html.twig', [
-            'product_form' => $form->createView()
-        ]);
 
-    }
-
-    #[Route('/user', name: 'user')]
+    #[Route('/user', name: 'add_user')]
     public function addUser(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($user);
             $this->entityManager->flush();
             return $this->redirectToRoute('main');
@@ -68,7 +52,27 @@ class MainController extends AbstractController
         return $this->render('main/user.html.twig', [
             'user_form' => $form->createView()
         ]);
-
     }
-    
+
+    #[Route('/product', name: 'add_product')]
+    public function addProduct(Request $request): Response
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductFormType::class, $product);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($product);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('main');
+        }
+        return $this->render('main/product.html.twig', [
+            'product_form' => $form->createView()
+        ]);
+    }
+
+
 }
+
+
+
+

@@ -3,20 +3,24 @@
 {% block title %}User Products{% endblock %}
 
 {% block body %}
-    <h2>Users and their Products</h2>
+    <h2>Users and their Products</h2><hr>
     {% for user in users %}
         <h4>{{ user }}</h4>
         {% for product in products %}
             {% if user.id == product.user.id %}
-                {{ product.name }}
+                <ul>
+                    <li>{{ product.name }}</li>
+                </ul>
             {% endif %}
-
         {% endfor %}
     {% endfor %}
+    <hr>
     <p>
-        <a href="{{ path('user') }}">user create</a>
+        <a href="{{ path('add_user') }}">user create</a>
     </p>
     <p>
-        <a href="{{ path('product') }}">add products</a>
+        <a href="{{ path('add_product') }}">add products</a>
     </p>
+
 {% endblock %}
+
