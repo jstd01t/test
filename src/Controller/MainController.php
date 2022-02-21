@@ -26,7 +26,7 @@ class MainController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/main', name: 'main')]
+    #[Route('/', name: 'main')]
     public function index(UserRepository $userRepository, ProductRepository $productRepository): Response
     {
         return new Response($this->twig->render('main/index.html.twig', [
